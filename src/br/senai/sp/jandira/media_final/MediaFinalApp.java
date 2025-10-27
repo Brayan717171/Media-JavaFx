@@ -3,12 +3,14 @@ package br.senai.sp.jandira.media_final;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.Optional;
+
+import static javafx.scene.control.Alert.AlertType.CONFIRMATION;
 
 public class MediaFinalApp extends Application {
     public static void main(String[] args) {
@@ -113,8 +115,18 @@ public class MediaFinalApp extends Application {
             notasStr[3] = textFieldNota4.getText();
             notas[3] = Double.parseDouble(notasStr[3]);
 
-            double mediaFinal = (notas[0] + notas[1] + notas[2] + notas[3]) / notas.length;
-            String mediaFinalstr = String.format("%.2f", mediaFinal);
+            // Uso de loop while (enquanto)
+            double mediaFinal = 0.0;
+            int i = 0;
+            while (i < notas.length){
+                mediaFinal = mediaFinal + notas[i];
+                i = i + 1;
+            }
+
+            mediaFinal = mediaFinal / notas.length;
+
+
+            String mediaFinalstr = getString(mediaFinal);
 
             System.out.println(mediaFinal);
 
@@ -136,6 +148,35 @@ public class MediaFinalApp extends Application {
 
 
         });
+        buttonLimpar.setOnAction(click -> {
+            textFieldNome.clear();
+            textFieldNota1.clear();
+            textFieldNota2.clear();
+            textFieldNota3.clear();
+            textFieldNota4.clear();
+            labelAluno.setText("Nome do aluno: ");
+            labelSituação.setText("Situação: ");
+            labelMediaFinal.setText("Média final: ");
+            textFieldNome.requestFocus();
 
+        });
+        buttonSair.setOnAction(click -> {
+            Alert alerta = new Alert(Alert.AlertType.CONFIRMATION, "Confirma a saída? ",ButtonType.YES, ButtonType.NO);
+            Optional<ButtonType> botaoPrecionado = alerta.showAndWait();
+            if (botaoPrecionado.get() == ButtonType.YES){
+                Alert alerta2 = new Alert(Alert.AlertType.INFORMATION, "Até logo");
+                alerta2.showAndWait();
+                System.exit(0);
+
+            }
+
+            //System.exit(0);
+        });
+
+    }
+
+    private static String getString(double mediaFinal) {
+        String mediaFinalstr = String.format("%.2f", mediaFinal);
+        return mediaFinalstr;
     }
 }
