@@ -46,13 +46,13 @@ public class MediaFinalApp extends Application {
         painelDeBotoes.setSpacing(10);
         Button buttonCalcularMedia = new Button("Calcular média");
         buttonCalcularMedia.setPrefWidth(150);
-        buttonCalcularMedia.setPrefHeight(30);
+        buttonCalcularMedia.setPrefHeight(50);
         Button buttonLimpar = new Button("Limpar");
         buttonLimpar.setPrefWidth(150);
-        buttonLimpar.setPrefHeight(30);
+        buttonLimpar.setPrefHeight(40);
         Button buttonSair = new Button("Sair");
         buttonSair.setPrefWidth(150);
-        buttonSair.setPrefHeight(30);
+        buttonSair.setPrefHeight(40);
         painelDeBotoes.getChildren().addAll(buttonCalcularMedia, buttonLimpar, buttonSair);
 
         // Painel
@@ -77,12 +77,6 @@ public class MediaFinalApp extends Application {
         );
 
 
-
-
-
-
-
-
         root.setRight(painelDeBotoes);
         root.setTop(labelTitulo);
         root.setBottom(painelResultado);
@@ -95,7 +89,48 @@ public class MediaFinalApp extends Application {
         //  Mostrar o stage (tela)
         stage.show();
 
-        // Eventos de cliqus de botões
-        buttonCalcularMedia.addEventHandler();
+        // Eventos de cliques de botões
+        buttonCalcularMedia.setOnAction(click -> {
+            System.out.println("Botão cliado");
+            String nomeDigitado = textFieldNome.getText();
+            labelAluno.setText("Nome do aluno: " + nomeDigitado);
+
+            //calcular a média
+            //obter as notas
+            double nota1 = Double.parseDouble(textFieldNota1.getText());
+
+            String nota2str = textFieldNota2.getText();
+            double nota2 = Double.parseDouble(nota2str);
+
+            String nota3str = textFieldNota3.getText();
+            double nota3 = Double.parseDouble(nota3str);
+
+            String nota4str = textFieldNota4.getText();
+            double nota4 = Double.parseDouble(nota4str);
+
+            double mediaFinal = (nota1 + nota2 + nota3 + nota4) / 4;
+            String mediaFinalstr = String.format("%.2f", mediaFinal);
+
+            System.out.println(mediaFinal);
+
+            labelMediaFinal.setText("Média final: " + mediaFinalstr);
+
+            // definir situação
+            String situacao;
+
+            if (mediaFinal < 4){
+                situacao = ("Reprovado!!");
+            } else if (mediaFinal >= 6) {
+                situacao = ("Aprovado!!");
+            }
+            else {
+                situacao = ("Recuperação!!");
+            }
+
+            labelSituação.setText("Situação: " + situacao);
+
+
+        });
+
     }
 }
