@@ -91,24 +91,29 @@ public class MediaFinalApp extends Application {
 
         // Eventos de cliques de botões
         buttonCalcularMedia.setOnAction(click -> {
-            System.out.println("Botão cliado");
+            System.out.println("Botão criado");
             String nomeDigitado = textFieldNome.getText();
             labelAluno.setText("Nome do aluno: " + nomeDigitado);
 
             //calcular a média
             //obter as notas
-            double nota1 = Double.parseDouble(textFieldNota1.getText());
+            // criar um vetor de notas
+            double[] notas = new double[4];
+            String[] notasStr = new String[4];
 
-            String nota2str = textFieldNota2.getText();
-            double nota2 = Double.parseDouble(nota2str);
+            notasStr[0] = textFieldNota1.getText();
+            notas[0] = Double.parseDouble(notasStr[0]);
 
-            String nota3str = textFieldNota3.getText();
-            double nota3 = Double.parseDouble(nota3str);
+            notasStr[1] = textFieldNota2.getText();
+            notas[1] = Double.parseDouble(notasStr[1]);
 
-            String nota4str = textFieldNota4.getText();
-            double nota4 = Double.parseDouble(nota4str);
+            notasStr[2] = textFieldNota3.getText();
+            notas[2] = Double.parseDouble(notasStr[2]);
 
-            double mediaFinal = (nota1 + nota2 + nota3 + nota4) / 4;
+            notasStr[3] = textFieldNota4.getText();
+            notas[3] = Double.parseDouble(notasStr[3]);
+
+            double mediaFinal = (notas[0] + notas[1] + notas[2] + notas[3]) / notas.length;
             String mediaFinalstr = String.format("%.2f", mediaFinal);
 
             System.out.println(mediaFinal);
