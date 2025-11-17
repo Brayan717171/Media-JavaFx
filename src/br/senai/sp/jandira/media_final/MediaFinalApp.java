@@ -119,8 +119,10 @@ public class MediaFinalApp extends Application {
             double mediaFinal = 0.0;
             int i = 0;
             while (i < notas.length){
-                mediaFinal = mediaFinal + notas[i];
-                i = i + 1;
+                //mediaFinal = mediaFinal + notas[i];
+                mediaFinal += notas[i];
+                //i = i + 1;
+                i++;
             }
 
             mediaFinal = mediaFinal / notas.length;
@@ -176,7 +178,6 @@ public class MediaFinalApp extends Application {
     }
 
     private static String getString(double mediaFinal) {
-        String mediaFinalstr = String.format("%.2f", mediaFinal);
-        return mediaFinalstr;
+        return String.format("%.2f", mediaFinal);
     }
 }
